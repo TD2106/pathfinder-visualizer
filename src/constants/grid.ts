@@ -1,0 +1,2 @@
+export const MIN_GRID_DIMENSION_SIZE = 10;
+export const MAX_GRID_DIMENSION_SIZE = 50;

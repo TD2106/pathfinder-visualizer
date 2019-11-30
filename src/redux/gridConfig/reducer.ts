@@ -1,12 +1,12 @@
 import { Reducer, AnyAction } from 'redux';
 import { GridConfigActionTypes } from './types';
-import {
-    INITIAL_GRID_CONFIG,
-    MIN_GRID_DIMENSION_SIZE,
-    MAX_GRID_DIMENSION_SIZE,
-} from '../../constants/ReduxStore';
+import { INITIAL_GRID_CONFIG } from '../../constants/ReduxStore';
 import { GridConfig } from '../../type/ReduxStore';
 import { getValueWithinRange } from '../../utils';
+import {
+    MIN_GRID_DIMENSION_SIZE,
+    MAX_GRID_DIMENSION_SIZE,
+} from '../../constants/grid';
 
 export const gridConfigReducer: Reducer<GridConfig> = (
     state: GridConfig = INITIAL_GRID_CONFIG,
