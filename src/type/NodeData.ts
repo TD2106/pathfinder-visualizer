@@ -6,3 +6,8 @@ export interface NodeData {
     rowIndex: number;
     colIndex: number;
 }
+
+export interface GridPosition {
+    rowIndex: number;
+    colIndex: number;
+}
