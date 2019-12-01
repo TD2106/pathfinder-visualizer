@@ -1,4 +1,4 @@
-import { GridPosition } from '../type/NodeData';
+import { GridPosition } from '../../type/NodeData';
 
 export interface QueueNode {
     position: GridPosition;

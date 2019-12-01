@@ -34,7 +34,7 @@ describe('NodesActions', () => {
     test('setNodeIsVisited should return the correct action', () => {
         const mockIsVisited = true;
         const expectedAction = {
-            type: NodesActionTypes.SET_NODE_IS_PATH,
+            type: NodesActionTypes.SET_NODE_IS_VISITED,
             payload: {
                 rowIndex: MOCK_ROW_INDEX,
                 colIndex: MOCK_COL_INDEX,
