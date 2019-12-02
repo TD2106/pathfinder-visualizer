@@ -91,9 +91,13 @@ describe('PathFinder', () => {
             { rowIndex: 1, colIndex: 3 },
             { rowIndex: 2, colIndex: 3 },
         ];
-        expectedPath.forEach((pos) => {
-            chai.expect(stubUpdateIsPath).to.have.been.calledWith(pos.rowIndex, pos.colIndex, true);
-        })
+        expectedPath.forEach(pos => {
+            chai.expect(stubUpdateIsPath).to.have.been.calledWith(
+                pos.rowIndex,
+                pos.colIndex,
+                true,
+            );
+        });
     });
 });
 
