@@ -6,8 +6,8 @@ import { EMPTY_GRID_POSITION } from '../constants/grid';
 
 export class PathFinderBuilder {
     private _algorithmType: string = BLANK_STRING;
-    private _rows: number = 0;
-    private _cols: number = 0;
+    private _rows = 0;
+    private _cols = 0;
     private _nodes: NodeData[] = [];
     private _updateGridUIIsVisted: UpdateGridUIBooleanValue = EMPTY_FUNCTION;
     private _updateGridUIIsPath: UpdateGridUIBooleanValue = EMPTY_FUNCTION;

@@ -10,10 +10,12 @@
     "env": {
       "browser": true,
       "jasmine": true,
-      "jest": true
+      "jest": true,
+      "es6": true
     },
     "rules": {
-      "prettier/prettier": ["error", { "singleQuote": true }]
+      "prettier/prettier": ["error", { "singleQuote": true }],
+      "@typescript-eslint/no-use-before-define": ["error", { "variables": false }]
     },
     "settings": {
       "react": {

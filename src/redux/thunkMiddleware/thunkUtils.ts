@@ -34,7 +34,7 @@ export const createRandomGridMarkedPosition = (
     rows: number,
     cols: number,
 ): GridMarkedPosition => {
-    let startPosition = generateRandomPosition(rows, cols);
+    const startPosition = generateRandomPosition(rows, cols);
     let endPosition = cloneDeep(startPosition);
     while (isEqual(endPosition, startPosition)) {
         endPosition = generateRandomPosition(rows, cols);

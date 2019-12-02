@@ -68,7 +68,7 @@ describe('PathFinder', () => {
             { rowIndex: 1, colIndex: 3 },
             { rowIndex: 2, colIndex: 3 },
         ];
-        chai.expect(pathFinder['constructPath']()).to.equal(expectedPath);
+        chai.expect(pathFinder['constructPath']()).to.eql(expectedPath);
     });
 
     test('visualizePath should return the correct path', async () => {

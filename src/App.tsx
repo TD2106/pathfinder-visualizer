@@ -1,12 +1,42 @@
 import React from 'react';
-import { NodeGrid } from './components/NodeGrid';
+import { connect } from 'react-redux';
+import { ReduxStore } from './type/ReduxStore';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { resetGrid } from './redux/thunkMiddleware';
+import ConnectedNodeGrid from './components/NodeGrid';
 
-const App: React.FC = () => {
-    return (
-        <div className="App">
-            <NodeGrid />
-        </div>
-    );
+interface DispatchProps {
+    initGrid: () => void;
+}
+
+type Props = DispatchProps;
+
+const MAIN_APP_CLASS = 'pathfinder-visualizer-app';
+
+export class App extends React.Component<Props> {
+    public componentDidMount = (): void => {
+        this.props.initGrid();
+    };
+
+    public render(): JSX.Element {
+        return (
+            <div className={MAIN_APP_CLASS}>
+                <ConnectedNodeGrid />
+            </div>
+        );
+    }
+}
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<ReduxStore, {}, AnyAction>,
+): DispatchProps => {
+    return {
+        initGrid: (): void => dispatch(resetGrid()),
+    };
 };
 
-export default App;
+export default connect<{}, DispatchProps, {}, ReduxStore>(
+    null,
+    mapDispatchToProps,
+)(App);

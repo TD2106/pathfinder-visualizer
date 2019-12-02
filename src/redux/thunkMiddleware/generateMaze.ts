@@ -19,7 +19,7 @@ export const generateMaze = (): ThunkAction<
 };
 
 const updateIsWallFactory = (dispatch: Dispatch): UpdateGridUIBooleanValue => {
-    return (rowIndex, colIndex, isWall) => {
+    return (rowIndex, colIndex, isWall): void => {
         dispatch(setNodeIsWall(rowIndex, colIndex, isWall));
     };
 };

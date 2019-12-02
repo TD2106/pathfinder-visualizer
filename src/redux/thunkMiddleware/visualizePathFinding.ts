@@ -21,13 +21,13 @@ export const visualizePathFinding = (): ThunkAction<
 const updateIsVisitedFactory = (
     dispatch: Dispatch,
 ): UpdateGridUIBooleanValue => {
-    return (rowIndex, colIndex, isVisited) => {
+    return (rowIndex, colIndex, isVisited): void => {
         dispatch(setNodeIsVisited(rowIndex, colIndex, isVisited));
     };
 };
 
 const updateIsPathFactory = (dispatch: Dispatch): UpdateGridUIBooleanValue => {
-    return (rowIndex, colIndex, isPath) => {
+    return (rowIndex, colIndex, isPath): void => {
         dispatch(setNodeIsPath(rowIndex, colIndex, isPath));
     };
 };

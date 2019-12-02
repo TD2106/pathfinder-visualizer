@@ -45,7 +45,7 @@ export class PathFinder {
         this.fillGridWithNodesData(pathFinderBuilder.nodes);
     }
 
-    private fillGridWithNodesData = (nodes: NodeData[]) => {
+    private fillGridWithNodesData = (nodes: NodeData[]): void => {
         nodes.forEach((node): void => {
             this.grid[node.rowIndex][node.colIndex] = node.isWall
                 ? WALL_VALUE

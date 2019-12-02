@@ -5,8 +5,8 @@ import { EMPTY_GRID_POSITION } from '../constants/grid';
 import { MazeGenerator } from './MazeGenerator';
 
 export class MazeGeneratorBuilder {
-    private _rows: number = 0;
-    private _cols: number = 0;
+    private _rows = 0;
+    private _cols = 0;
     private _updateGridUIIsWall: UpdateGridUIBooleanValue = EMPTY_FUNCTION;
     private _startPosition: GridPosition = EMPTY_GRID_POSITION;
     private _endPosition: GridPosition = EMPTY_GRID_POSITION;
