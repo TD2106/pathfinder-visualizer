@@ -39,7 +39,7 @@ export const isPositionUnVisted = (
     return cost[rowIndex][colIndex] === MAX_COST_VALUE;
 };
 
-export const createNextPosition = (
+export const createNewPositionBasedOnDirection = (
     currentPosition: GridPosition,
     [rowDirection, colDirection]: number[],
 ): GridPosition => {

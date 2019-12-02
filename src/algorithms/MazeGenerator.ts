@@ -7,7 +7,7 @@ import {
     HORIZONTAL_DIVISION,
     ALGORITHM_GRID_UPDATE_TIMEOUT,
 } from '../constants/algorithms';
-import { genrateRandomIntegerInRange, sleep } from '../utils';
+import { generateRandomIntegerInRange, sleep } from '../utils';
 
 export class MazeGenerator {
     private rows: number;
@@ -99,7 +99,7 @@ export class MazeGenerator {
         } else if (rowLength > colLength) {
             return HORIZONTAL_DIVISION;
         } else {
-            return genrateRandomIntegerInRange(0, 1) % 2 === 0
+            return generateRandomIntegerInRange(0, 1) % 2 === 0
                 ? HORIZONTAL_DIVISION
                 : VERTICAL_DIVISION;
         }
@@ -111,8 +111,8 @@ export class MazeGenerator {
         startingCol: number,
         endingCol: number,
     ): Promise<number> => {
-        const divideRow = genrateRandomIntegerInRange(startingRow, endingRow);
-        const blankColIndex = genrateRandomIntegerInRange(
+        const divideRow = generateRandomIntegerInRange(startingRow, endingRow);
+        const blankColIndex = generateRandomIntegerInRange(
             startingCol,
             endingCol,
         );
@@ -134,8 +134,8 @@ export class MazeGenerator {
         startingCol: number,
         endingCol: number,
     ): Promise<number> => {
-        const divideCol = genrateRandomIntegerInRange(startingCol, endingCol);
-        const blankRowIndex = genrateRandomIntegerInRange(
+        const divideCol = generateRandomIntegerInRange(startingCol, endingCol);
+        const blankRowIndex = generateRandomIntegerInRange(
             startingRow,
             endingRow,
         );

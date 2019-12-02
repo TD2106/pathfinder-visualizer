@@ -12,7 +12,7 @@ export const sleep = (time: number): Promise<void> => {
     });
 };
 
-export const genrateRandomIntegerInRange = (
+export const generateRandomIntegerInRange = (
     startRange: number,
     endRange: number,
 ): number => {

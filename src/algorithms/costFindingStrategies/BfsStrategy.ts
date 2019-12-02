@@ -8,7 +8,7 @@ import {
     sleep,
     isPositionUnVisted,
     isAbleToEnterPosition,
-    createNextPosition,
+    createNewPositionBasedOnDirection,
 } from '../../utils';
 import {
     ALGORITHM_GRID_UPDATE_TIMEOUT,
@@ -66,7 +66,10 @@ export class BfsStrategy implements CostFindingStrategy {
         newDirection: number[],
         currentCost: number,
     ): void => {
-        const newPosition = createNextPosition(currentPosition, newDirection);
+        const newPosition = createNewPositionBasedOnDirection(
+            currentPosition,
+            newDirection,
+        );
         if (isAbleToEnterPosition(newPosition, this.grid, this.cost)) {
             this.queue.push(this.createNewQueueNode(newPosition, currentCost));
         }

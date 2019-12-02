@@ -2,7 +2,7 @@ import { NodeData, GridPosition } from '../type/NodeData';
 import {
     sleep,
     isPositionUnVisted,
-    createNextPosition,
+    createNewPositionBasedOnDirection,
     isValidPosition,
     isNotWallNode,
 } from '../utils';
@@ -81,7 +81,7 @@ export class PathFinder {
         while (!isEqual(currentPosition, this.startPosition)) {
             reversedPath.push(currentPosition);
             for (const previousDirection of NEIGHBORS_DIRECTION) {
-                const previousPosition = createNextPosition(
+                const previousPosition = createNewPositionBasedOnDirection(
                     currentPosition,
                     previousDirection,
                 );

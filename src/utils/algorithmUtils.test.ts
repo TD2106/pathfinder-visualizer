@@ -4,9 +4,10 @@ import {
     isNotWallNode,
     isPositionUnVisted,
     isValidPosition,
-    createNextPosition,
+    createNewPositionBasedOnDirection,
 } from './algorithmUtils';
 import { MAX_COST_VALUE, WALL_VALUE } from '../constants/algorithms';
+import { GridPosition } from '../type/NodeData';
 
 const MOCK_GRID = [
     [1, WALL_VALUE],
@@ -93,5 +94,18 @@ describe('algorithmUtils', () => {
         ).to.be.false;
     });
 
-    test('createNextPosition should return the correct result', () => {});
+    test('createNewPositionBasedOnDirection should return the correct result', () => {
+        const pos: GridPosition = {
+            rowIndex: 0,
+            colIndex: 1,
+        };
+        const direction = [0, 1];
+        const expectedResult: GridPosition = {
+            rowIndex: 0,
+            colIndex: 2,
+        };
+        chai.expect(createNewPositionBasedOnDirection(pos, direction)).to.eql(
+            expectedResult,
+        );
+    });
 });
