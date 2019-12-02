@@ -1,7 +1,12 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import { CostFindingStrategyBuilder } from './StrategyBuilder';
-import { BFS, MAX_COST_VALUE, DIJKSTRA, ASTAR } from '../../constants/algorithms';
+import {
+    BFS,
+    MAX_COST_VALUE,
+    DIJKSTRA,
+    ASTAR,
+} from '../../constants/algorithms';
 import { GridPosition } from '../../type/NodeData';
 
 const MOCK_GRID = [

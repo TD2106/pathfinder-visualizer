@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { getValueWithinRange } from './utils';
+import { getValueWithinRange, genrateRandomIntegerInRange } from './utils';
 
 describe('utils', () => {
     test('getValueWithinRange should return the correct result', () => {
@@ -17,5 +17,15 @@ describe('utils', () => {
         chai.expect(getValueWithinRange(value, minRange, maxRange)).to.equal(
             maxRange,
         );
+    });
+
+    test('genrateRandomIntegerInRange should return a random integer within range', () => {
+        for (let i = 0; i < 100; i++) {
+            const start = i,
+                end = i + 10;
+            const randomInt = genrateRandomIntegerInRange(start, end);
+            chai.expect(randomInt >= start).to.be.true;
+            chai.expect(randomInt <= end).to.be.true;
+        }
     });
 });

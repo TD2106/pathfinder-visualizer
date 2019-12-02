@@ -7,7 +7,7 @@ import { nodesReducer } from './nodes/reducer';
 const rootReducer = combineReducers({
     algorithmType: algorithmTypeReducer,
     gridConfig: gridConfigReducer,
-    nodes: nodesReducer
+    nodes: nodesReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
