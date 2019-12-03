@@ -111,7 +111,7 @@ export class MazeGenerator {
         startingCol: number,
         endingCol: number,
     ): Promise<number> => {
-        const divideRow = generateRandomIntegerInRange(startingRow, endingRow);
+        const divideRow = this.getMiddleValueInRange(startingRow, endingRow);
         const blankColIndex = generateRandomIntegerInRange(
             startingCol,
             endingCol,
@@ -134,7 +134,7 @@ export class MazeGenerator {
         startingCol: number,
         endingCol: number,
     ): Promise<number> => {
-        const divideCol = generateRandomIntegerInRange(startingCol, endingCol);
+        const divideCol = this.getMiddleValueInRange(startingCol, endingCol);
         const blankRowIndex = generateRandomIntegerInRange(
             startingRow,
             endingRow,
@@ -150,6 +150,10 @@ export class MazeGenerator {
         }
         return divideCol;
     };
+
+    private getMiddleValueInRange = (startRange: number, endRange: number): number => {
+        return Math.floor((endRange - startRange + 1) / 2) + startRange;
+    }
 
     private isPositionNotStartOrEndPosition = (
         rowIndex: number,
