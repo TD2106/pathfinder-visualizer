@@ -1,4 +1,4 @@
-import { GridPosition } from "../type/NodeData";
+import { GridPosition } from '../type/NodeData';
 
 export const getValueWithinRange = (
     value: number,
@@ -22,7 +22,11 @@ export const generateRandomIntegerInRange = (
 };
 
 export const isSamePosition = (
-    firstPosition: GridPosition, secondPosition: GridPosition
+    firstPosition: GridPosition,
+    secondPosition: GridPosition,
 ): boolean => {
-    return firstPosition.rowIndex === secondPosition.rowIndex && firstPosition.colIndex === secondPosition.colIndex;
-}
+    return (
+        firstPosition.rowIndex === secondPosition.rowIndex &&
+        firstPosition.colIndex === secondPosition.colIndex
+    );
+};

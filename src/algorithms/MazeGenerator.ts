@@ -7,7 +7,7 @@ import {
     HORIZONTAL_DIVISION,
     ALGORITHM_GRID_UPDATE_TIMEOUT,
 } from '../constants/algorithms';
-import { generateRandomIntegerInRange, sleep } from '../utils';
+import { generateRandomIntegerInRange, sleep, getValueWithinRange } from '../utils';
 
 export class MazeGenerator {
     private rows: number;
@@ -15,6 +15,7 @@ export class MazeGenerator {
     private updateGridUIIsWall: UpdateGridUIBooleanValue;
     private startPosition: GridPosition;
     private endPosition: GridPosition;
+    private wallNodeKeySet: Set<string>;
 
     public constructor(mazeGeneratorBuilder: MazeGeneratorBuilder) {
         this.rows = mazeGeneratorBuilder.rows;
@@ -22,6 +23,7 @@ export class MazeGenerator {
         this.updateGridUIIsWall = mazeGeneratorBuilder.updateGridUIIsWall;
         this.startPosition = mazeGeneratorBuilder.startPosition;
         this.endPosition = mazeGeneratorBuilder.endPosition;
+        this.wallNodeKeySet = new Set();
     }
 
     public constructMaze = async (): Promise<void> => {
@@ -37,8 +39,8 @@ export class MazeGenerator {
         const rowLength = this.getRangeBetweenTwoValue(startingRow, endingRow);
         const colLength = this.getRangeBetweenTwoValue(startingCol, endingCol);
         if (
-            rowLength >= MIN_LENGTH_FOR_RECURSIVE_DIVISION &&
-            colLength >= MIN_LENGTH_FOR_RECURSIVE_DIVISION
+            rowLength > MIN_LENGTH_FOR_RECURSIVE_DIVISION &&
+            colLength > MIN_LENGTH_FOR_RECURSIVE_DIVISION
         ) {
             const orientation = this.chooseOrientation(rowLength, colLength);
             if (orientation === HORIZONTAL_DIVISION) {
@@ -112,17 +114,24 @@ export class MazeGenerator {
         endingCol: number,
     ): Promise<number> => {
         const divideRow = this.getMiddleValueInRange(startingRow, endingRow);
-        const blankColIndex = generateRandomIntegerInRange(
-            startingCol,
-            endingCol,
+        let blankColIndex = generateRandomIntegerInRange(
+            startingCol + 1,
+            endingCol - 1,
         );
-        for (let colIndex = startingCol; colIndex <= endingCol; colIndex += 1) {
+        const start = startingCol - 1 < 0 || this.wallNodeKeySet.has(this.createNodeKey(divideRow, startingCol)) ? startingCol : startingCol + 1;
+        const end = endingCol + 1 === this.cols || this.wallNodeKeySet.has(this.createNodeKey(divideRow, endingCol)) ? endingCol : endingCol - 1;
+        blankColIndex = start === startingCol && end === endingCol ? blankColIndex : -1;
+        for (let colIndex = start; colIndex <= end; colIndex += 1) {
+            if (!this.isPositionNotStartOrEndPosition(divideRow, colIndex)) {
+                blankColIndex = -1;
+            }
+        }
+        for (let colIndex = start; colIndex <= end; colIndex += 1) {
             if (
                 colIndex !== blankColIndex &&
                 this.isPositionNotStartOrEndPosition(divideRow, colIndex)
             ) {
-                this.updateGridUIIsWall(divideRow, colIndex, true);
-                await sleep(ALGORITHM_GRID_UPDATE_TIMEOUT);
+                await this.updateIsWallAndSleep(divideRow, colIndex);
             }
         }
         return divideRow;
@@ -135,25 +144,35 @@ export class MazeGenerator {
         endingCol: number,
     ): Promise<number> => {
         const divideCol = this.getMiddleValueInRange(startingCol, endingCol);
-        const blankRowIndex = generateRandomIntegerInRange(
-            startingRow,
-            endingRow,
+        let blankRowIndex = generateRandomIntegerInRange(
+            startingRow + 1,
+            endingRow - 1,
         );
-        for (let rowIndex = startingCol; rowIndex <= endingRow; rowIndex += 1) {
+        const start = startingRow - 1 < 0 || this.wallNodeKeySet.has(this.createNodeKey(startingRow, divideCol)) ? startingRow : startingRow + 1;
+        const end = endingRow + 1 === this.rows || this.wallNodeKeySet.has(this.createNodeKey(endingRow, divideCol)) ? endingRow : endingRow - 1;
+        blankRowIndex = start === startingRow && end === endingRow ? blankRowIndex : -1;
+        for (let rowIndex = start; rowIndex <= end; rowIndex += 1) {
+            if (!this.isPositionNotStartOrEndPosition(rowIndex, divideCol)) {
+                blankRowIndex = -1;
+            }
+        }
+        for (let rowIndex = start; rowIndex <= end; rowIndex += 1) {
             if (
                 rowIndex !== blankRowIndex &&
                 this.isPositionNotStartOrEndPosition(rowIndex, divideCol)
             ) {
-                this.updateGridUIIsWall(rowIndex, divideCol, true);
-                await sleep(ALGORITHM_GRID_UPDATE_TIMEOUT);
+                await this.updateIsWallAndSleep(rowIndex, divideCol);
             }
         }
         return divideCol;
     };
 
-    private getMiddleValueInRange = (startRange: number, endRange: number): number => {
-        return Math.floor((endRange - startRange + 1) / 2) + startRange;
-    }
+    private getMiddleValueInRange = (
+        startRange: number,
+        endRange: number,
+    ): number => {
+        return getValueWithinRange(Math.floor((endRange + startRange) / 2) + generateRandomIntegerInRange(0, 2), startRange, endRange);
+    };
 
     private isPositionNotStartOrEndPosition = (
         rowIndex: number,
@@ -166,4 +185,14 @@ export class MazeGenerator {
                 colIndex !== this.endPosition.colIndex)
         );
     };
+
+    private async updateIsWallAndSleep(rowIndex: number, colIndex: number) {
+        this.updateGridUIIsWall(rowIndex, colIndex, true);
+        this.wallNodeKeySet.add(this.createNodeKey(rowIndex, colIndex));
+        await sleep(ALGORITHM_GRID_UPDATE_TIMEOUT);
+    }
+
+    private createNodeKey = (rowIndex: number, colIndex: number): string => {
+        return `r${rowIndex}c${colIndex}`;
+    }
 }

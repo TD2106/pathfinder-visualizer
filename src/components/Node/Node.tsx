@@ -15,14 +15,33 @@ interface Props {
 }
 
 export const Node = (props: Props): JSX.Element => {
-    const getWeightDisplayValue = (): number | string | JSX.Element=> {
-        if(props.isStart){
-            return <img src={startIcon} alt="start"/>;
-        } else if(props.isEnd){
-            return <img src={endIcon} alt="end"/>;
+    const getWeightDisplayValue = (): number | string | JSX.Element => {
+        if (props.isStart) {
+            return <img src={startIcon} alt="start" />;
+        } else if (props.isEnd) {
+            return <img src={endIcon} alt="end" />;
         }
         return props.isDisplayWeight ? props.nodeData.weight : BLANK_STRING;
     };
 
-    return <div className={NODE_CLASS}>{getWeightDisplayValue()}</div>;
+    const getBackgroundColor = (): string => {
+        if (props.nodeData.isPath) {
+            return 'yellow';
+        } else if (props.nodeData.isVisited) {
+            return 'blue';
+        } else if(props.nodeData.isWall) {
+            return 'grey';
+        } else {
+            return 'transparent';
+        }
+    };
+
+    return (
+        <div
+            className={NODE_CLASS}
+            style={{ backgroundColor: getBackgroundColor() }}
+        >
+            {getWeightDisplayValue()}
+        </div>
+    );
 };

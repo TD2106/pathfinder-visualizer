@@ -1,5 +1,9 @@
 import chai from 'chai';
-import { getValueWithinRange, generateRandomIntegerInRange, isSamePosition } from './utils';
+import {
+    getValueWithinRange,
+    generateRandomIntegerInRange,
+    isSamePosition,
+} from './utils';
 
 describe('utils', () => {
     test('getValueWithinRange should return the correct result', () => {
@@ -30,10 +34,10 @@ describe('utils', () => {
     });
 
     test('isSamePosition should return the correct result', () => {
-        let firstPosition = {rowIndex: 10, colIndex: 10};
-        let secondPosition = {rowIndex: 10, colIndex: 10};
+        let firstPosition = { rowIndex: 10, colIndex: 10 };
+        let secondPosition = { rowIndex: 10, colIndex: 10 };
         chai.expect(isSamePosition(firstPosition, secondPosition)).to.be.true;
         secondPosition.rowIndex = 1;
         chai.expect(isSamePosition(firstPosition, secondPosition)).to.be.false;
-    })
+    });
 });
