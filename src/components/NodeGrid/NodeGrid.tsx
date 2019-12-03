@@ -1,15 +1,17 @@
 import React from 'react';
 import { Node } from '../Node';
 import './style.css';
-import { GridConfig, ReduxStore } from '../../type/ReduxStore';
+import { GridConfig, ReduxStore, GridMarkedPosition } from '../../type/ReduxStore';
 import { NodeData } from '../../type/NodeData';
 import { connect } from 'react-redux';
 import { DIJKSTRA } from '../../constants/algorithms';
+import { isSamePosition } from '../../utils';
 
 interface ReduxStateProps {
     gridConfig: GridConfig;
     nodes: NodeData[];
     algorithmType: string;
+    gridMarkedPosition: GridMarkedPosition
 }
 
 type Props = ReduxStateProps;
@@ -29,6 +31,8 @@ export const NodeGrid = (props: Props): JSX.Element => {
                         key={nodeKey}
                         nodeData={nodeData}
                         isDisplayWeight={props.algorithmType === DIJKSTRA}
+                        isStart={isSamePosition(nodeData, props.gridMarkedPosition.start)}
+                        isEnd={isSamePosition(nodeData, props.gridMarkedPosition.end)}
                     />
                 );
             },
@@ -58,6 +62,7 @@ const mapStateToProps = (state: ReduxStore): ReduxStateProps => {
         gridConfig: state.gridConfig,
         nodes: state.nodes,
         algorithmType: state.algorithmType,
+        gridMarkedPosition: state.gridMarkedPosition
     };
 };
 

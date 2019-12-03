@@ -1,3 +1,5 @@
+import { GridPosition } from "../type/NodeData";
+
 export const getValueWithinRange = (
     value: number,
     minValue: number,
@@ -18,3 +20,9 @@ export const generateRandomIntegerInRange = (
 ): number => {
     return Math.floor(Math.random() * (endRange - startRange + 1)) + startRange;
 };
+
+export const isSamePosition = (
+    firstPosition: GridPosition, secondPosition: GridPosition
+): boolean => {
+    return firstPosition.rowIndex === secondPosition.rowIndex && firstPosition.colIndex === secondPosition.colIndex;
+}
