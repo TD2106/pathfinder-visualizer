@@ -7,6 +7,7 @@ import { resetGrid } from './redux/thunkMiddleware';
 import ConnectedNodeGrid from './components/NodeGrid';
 import { ConnectedAlgorithmSelector } from './components/AlgorithmSelector';
 import { ConnectedControllerButtons } from './components/ControllerButtons';
+import { ConnectedGridSizeForm } from './components/GridSizeForm';
 
 interface DispatchProps {
     initGrid: () => void;
@@ -24,8 +25,9 @@ export class App extends React.Component<Props> {
     public render(): JSX.Element {
         return (
             <div className={MAIN_APP_CLASS}>
-                <ConnectedAlgorithmSelector />
+                <ConnectedAlgorithmSelector/>
                 <ConnectedControllerButtons/>
+                <ConnectedGridSizeForm/>
                 <ConnectedNodeGrid />
             </div>
         );
