@@ -9,6 +9,7 @@ import { ALGORITHM_OPTIONS } from '../../constants/algorithms';
 
 interface ReduxStateProps {
     algorithmType: string;
+    isDisabledInput: boolean;
 }
 
 interface DispatchProps {
@@ -34,6 +35,7 @@ export const AlgorithmSelector = (props: Props): JSX.Element => {
     return (
         <div className={ALGORITHM_SELECTOR_CLASS}>
             <DropDown
+                disabled={props.isDisabledInput}
                 options={ALGORITHM_OPTIONS}
                 onChange={onChangeAlgoType}
                 value={getCurrentOption()}
@@ -45,6 +47,7 @@ export const AlgorithmSelector = (props: Props): JSX.Element => {
 const mapStateToProps = (state: ReduxStore): ReduxStateProps => {
     return {
         algorithmType: state.algorithmType,
+        isDisabledInput: state.isDisabledInput,
     };
 };
 

@@ -4,6 +4,7 @@ import { ReduxStore } from '../../type/ReduxStore';
 import { setNodeIsVisited, setNodeIsPath } from '../nodes/actions';
 import { UpdateGridUIBooleanValue } from '../../type/Function';
 import { PathFinderBuilder, PathFinder } from '../../algorithms';
+import { disableInput, enableInput } from '../isDisabledInput/actions';
 
 export const visualizePathFinding = (): ThunkAction<
     Promise<void>,
@@ -12,9 +13,11 @@ export const visualizePathFinding = (): ThunkAction<
     AnyAction
 > => {
     return async (dispatch: Dispatch, getState): Promise<void> => {
+        dispatch(disableInput());
         const currentState = getState();
         const pathFinder = createPathFinder(currentState, dispatch);
         await pathFinder.visualizePathFindingProcess();
+        dispatch(enableInput());
     };
 };
 

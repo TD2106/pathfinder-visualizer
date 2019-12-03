@@ -13,6 +13,7 @@ import {
 
 interface ReduxStateProps {
     algorithmType: string;
+    isDisabledInput: boolean;
 }
 
 interface DispatchProps {
@@ -29,14 +30,14 @@ const CONTROLLER_BUTTONS_CLASS = 'controller-buttons';
 export const ControllerButtons = (props: Props): JSX.Element => {
     return (
         <div className={CONTROLLER_BUTTONS_CLASS}>
-            <button onClick={props.dispatchVisualizePathFinding}>
+            <button onClick={props.dispatchVisualizePathFinding} disabled={props.isDisabledInput}>
                 Visualize Pathfinding
             </button>
-            <button onClick={props.dispatchGenerateMaze}>Generate Maze</button>
-            <button onClick={props.dispatchResetGrid}>Reset Grid</button>
+            <button onClick={props.dispatchGenerateMaze} disabled={props.isDisabledInput}>Generate Maze</button>
+            <button onClick={props.dispatchResetGrid} disabled={props.isDisabledInput}>Reset Grid</button>
             <button
                 onClick={props.dispatchGenerateRandomWeight}
-                disabled={props.algorithmType !== DIJKSTRA}
+                disabled={props.algorithmType !== DIJKSTRA || props.isDisabledInput}
             >
                 Generate random weight for nodes
             </button>
@@ -47,6 +48,7 @@ export const ControllerButtons = (props: Props): JSX.Element => {
 const mapStateToProps = (state: ReduxStore): ReduxStateProps => {
     return {
         algorithmType: state.algorithmType,
+        isDisabledInput: state.isDisabledInput,
     };
 };
 

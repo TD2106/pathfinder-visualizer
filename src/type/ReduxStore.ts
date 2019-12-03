@@ -5,6 +5,7 @@ export interface ReduxStore {
     gridConfig: GridConfig;
     nodes: NodeData[];
     gridMarkedPosition: GridMarkedPosition;
+    isDisabledInput: boolean;
 }
 
 export interface GridConfig {

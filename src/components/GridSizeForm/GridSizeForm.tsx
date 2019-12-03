@@ -1,6 +1,5 @@
 import React from 'react';
-import { ReduxStore } from '../../type/ReduxStore';
-import { BLANK_STRING } from '../../constants/commonConstants';
+import { ReduxStore, GridConfig } from '../../type/ReduxStore';
 import { MIN_GRID_DIMENSION_SIZE, MAX_GRID_DIMENSION_SIZE } from '../../constants/grid';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -16,14 +15,19 @@ interface DispatchProps {
     dispatchUpdateGridSize: (rows: number, cols: number) => void;
 }
 
-type Props = DispatchProps;
+interface ReduxStateProps {
+    gridConfig: GridConfig,
+    isDisabledInput: boolean,
+}
+
+type Props = ReduxStateProps & DispatchProps;
 
 class GridSizeForm extends React.Component<Props, State>{
     constructor(props: Props){
         super(props);
         this.state = {
-            rows: '20',
-            cols: '20',
+            rows: props.gridConfig.rows.toString(),
+            cols: props.gridConfig.cols.toString(),
         }
     }
 
@@ -50,7 +54,7 @@ class GridSizeForm extends React.Component<Props, State>{
                 <input type="number" name="rows" min={MIN_GRID_DIMENSION_SIZE} max={MAX_GRID_DIMENSION_SIZE} onChange={this.handleOnChangeRows} value={this.state.rows}></input>
                 <label htmlFor="cols">Cols</label>
                 <input type="number" name="cols" min={MIN_GRID_DIMENSION_SIZE} max={MAX_GRID_DIMENSION_SIZE} onChange={this.handleOnChangeCols} value={this.state.cols}></input>
-                <input type="submit" value={'Change grid size'}></input>
+                <input type="submit" value={'Change grid size'} disabled={this.props.isDisabledInput}></input>
             </form>
         )
     }
@@ -66,7 +70,15 @@ const mapDispatchToProps = (
         }
     };
 };
-export default connect<{}, DispatchProps, {}, ReduxStore>(
-    null,
+
+const mapStateToProps = (state: ReduxStore): ReduxStateProps => {
+    return {
+        gridConfig: state.gridConfig,
+        isDisabledInput: state.isDisabledInput,
+    };
+};
+
+export default connect<ReduxStateProps, DispatchProps, {}, ReduxStore>(
+    mapStateToProps,
     mapDispatchToProps,
 )(GridSizeForm);

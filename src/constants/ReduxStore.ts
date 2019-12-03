@@ -8,6 +8,7 @@ export const INITIAL_GRID_MARKED_POSITION: GridMarkedPosition = {
     start: EMPTY_GRID_POSITION,
     end: EMPTY_GRID_POSITION,
 };
+export const INITIAL_IS_DISABLED_INPUT = false;
 
 export const INITIAL_GRID_CONFIG: GridConfig = {
     rows: 20,
@@ -18,4 +19,5 @@ export const INITIAL_REDUX_STORE_STATE: ReduxStore = {
     gridConfig: INITIAL_GRID_CONFIG,
     nodes: INITIAL_NODES,
     gridMarkedPosition: INITIAL_GRID_MARKED_POSITION,
+    isDisabledInput: INITIAL_IS_DISABLED_INPUT,
 };

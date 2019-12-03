@@ -4,6 +4,7 @@ import { ReduxStore } from '../../type/ReduxStore';
 import { setNodeIsWall } from '../nodes/actions';
 import { UpdateGridUIBooleanValue } from '../../type/Function';
 import { MazeGenerator, MazeGeneratorBuilder } from '../../algorithms';
+import { disableInput, enableInput } from '../isDisabledInput/actions';
 
 export const generateMaze = (): ThunkAction<
     Promise<void>,
@@ -12,9 +13,11 @@ export const generateMaze = (): ThunkAction<
     AnyAction
 > => {
     return async (dispatch: Dispatch, getState): Promise<void> => {
+        dispatch(disableInput());
         const currentState = getState();
         const mazeGenerator = createMazeGenerator(currentState, dispatch);
         await mazeGenerator.constructMaze();
+        dispatch(enableInput());
     };
 };
 
