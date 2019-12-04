@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { changeAlgorithmType } from '../../redux/thunkMiddleware/changeAlgoType';
-import DropDown, { Option } from 'react-dropdown';
+import Select from 'react-select';
 import { ALGORITHM_OPTIONS } from '../../constants/algorithms';
 
 interface ReduxStateProps {
@@ -21,11 +21,11 @@ type Props = ReduxStateProps & DispatchProps;
 const ALGORITHM_SELECTOR_CLASS = 'algorithm-selector';
 
 export const AlgorithmSelector = (props: Props): JSX.Element => {
-    const onChangeAlgoType = (option: Option): void => {
+    const onChangeAlgoType = (option: any): void => {
         props.changeAlgoType(option.value);
     };
 
-    const getCurrentOption = (): Option => {
+    const getCurrentOption = () => {
         const currentOption = ALGORITHM_OPTIONS.find(option => {
             return option.value === props.algorithmType;
         });
@@ -34,7 +34,7 @@ export const AlgorithmSelector = (props: Props): JSX.Element => {
 
     return (
         <div className={ALGORITHM_SELECTOR_CLASS}>
-            <DropDown
+            <Select
                 disabled={props.isDisabledInput}
                 options={ALGORITHM_OPTIONS}
                 onChange={onChangeAlgoType}
