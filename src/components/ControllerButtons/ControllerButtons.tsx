@@ -10,6 +10,7 @@ import {
     generateRandomWeightForNodes,
     resetGrid,
 } from '../../redux/thunkMiddleware';
+import './style.scss';
 
 interface ReduxStateProps {
     algorithmType: string;
