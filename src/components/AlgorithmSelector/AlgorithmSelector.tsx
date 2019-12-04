@@ -6,6 +6,7 @@ import { AnyAction } from 'redux';
 import { changeAlgorithmType } from '../../redux/thunkMiddleware/changeAlgoType';
 import Select from 'react-select';
 import { ALGORITHM_OPTIONS } from '../../constants/algorithms';
+import './style.scss';
 
 interface ReduxStateProps {
     algorithmType: string;
