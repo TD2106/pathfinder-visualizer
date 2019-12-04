@@ -4,6 +4,7 @@ import { NodeData } from '../../type/NodeData';
 import { BLANK_STRING } from '../../constants/commonConstants';
 import startIcon from './start.png';
 import endIcon from './end.png';
+import { WALL, VISITED, PATH } from '../../constants/nodeColor';
 
 const NODE_CLASS = 'node';
 
@@ -26,11 +27,11 @@ export const Node = (props: Props): JSX.Element => {
 
     const getBackgroundColor = (): string => {
         if (props.nodeData.isPath) {
-            return 'yellow';
+            return PATH;
         } else if (props.nodeData.isVisited) {
-            return 'blue';
+            return VISITED;
         } else if(props.nodeData.isWall) {
-            return 'grey';
+            return WALL;
         } else {
             return 'transparent';
         }
