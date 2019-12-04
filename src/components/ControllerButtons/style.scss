@@ -2,7 +2,7 @@
     position: relative; /*ripple-must-have*/
     overflow: hidden; /*ripple-must-have*/
     margin: 10px 5px;
-    padding: 15px 15px;
+    padding: 11px 15px;
     border-radius: 5px;
     border: none;
     outline: none; /*get rid of browser blue outline*/
@@ -23,7 +23,7 @@
     background:  radial-gradient(circle, #6ab361 100%, #186868 100%);
 }
 
-.controller-buttons button:hover {
+.controller-buttons button:hover:not(:disabled) {
     box-shadow: 0 2px 10px #c0c1c4, 0 3px 6px  #9d9ea0;
     transition: all .2s ease;
     background: linear-gradient(to right top, rgba(13,110,104, 1) 2%, rgba(106, 179, 97,1)); 
@@ -47,6 +47,10 @@
         transform: scale(100, 100);
     }
 }
-.controller-buttons button:focus:not(:active):after {
+.controller-buttons button:focus:active:after {
     animation: ripple .7s ease-out;
+}
+
+.controller-buttons button:disabled {
+    background: linear-gradient(to right top, rgba(13,110,104, 0.4) 2%, rgba(106, 179, 97,0.4)); 
 }
