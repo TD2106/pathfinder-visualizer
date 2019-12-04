@@ -1,0 +1,57 @@
+* {
+    font-family: 'Gothic A1', sans-serif;   
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+    background: rgb(34,193,195);
+    background: linear-gradient(159deg, rgba(63,251,160,0.2) 0%, rgba(0,141,189,0.2) 100%);
+    margin: 0;
+    overflow: auto;
+}
+
+body{
+    position: fixed;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    background: white;
+    box-shadow: 0 5px 11px 0 rgba(100, 100, 100, 0.18), 0 4px 15px 0 rgba(130, 130, 130, 0.15);
+    position: fixed;
+    top:0;
+    z-index: 100;
+}
+
+.pathfinder-visualizer-app{
+    text-align: center;
+}
+
+.grid-container{
+    text-align: center;
+}
+
+.notation-container{
+    height: 40px;
+}
+
+.notation-container img{
+    height: 70%;
+    top: 20%;
+    position: relative;
+}
+
+.notation-container label{
+    margin-right: 40px;
+}
+
+.notation-container > div{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    top: 10%;
+    position: relative;
+    margin-right: 5px;
+}
