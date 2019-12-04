@@ -6,6 +6,10 @@ import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { changeGridDimension } from '../../redux/thunkMiddleware';
 
+import './style.scss';
+
+const GRID_SIZE_FORM_CLASS = 'grid-size-form';
+
 interface State {
     rows: string,
     cols: string,
@@ -49,12 +53,12 @@ class GridSizeForm extends React.Component<Props, State>{
 
     render = () => {
         return (
-            <form action="post" onSubmit={this.handleSubmit}>
+            <form className={GRID_SIZE_FORM_CLASS} action="post" onSubmit={this.handleSubmit}>
                 <label htmlFor="rows">Rows</label>
                 <input type="number" name="rows" min={MIN_GRID_DIMENSION_SIZE} max={MAX_GRID_DIMENSION_SIZE} onChange={this.handleOnChangeRows} value={this.state.rows}></input>
-                <label htmlFor="cols">Cols</label>
+                <label htmlFor="cols">Columns</label>
                 <input type="number" name="cols" min={MIN_GRID_DIMENSION_SIZE} max={MAX_GRID_DIMENSION_SIZE} onChange={this.handleOnChangeCols} value={this.state.cols}></input>
-                <input type="submit" value={'Change grid size'} disabled={this.props.isDisabledInput}></input>
+                <button type="submit" disabled={this.props.isDisabledInput}>Change grid size</button>
             </form>
         )
     }
