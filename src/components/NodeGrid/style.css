@@ -1,3 +1,8 @@
 .node-grid {
     display: grid;
+    text-align: center;
+    margin: 10px auto !important;
+    justify-items: center;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.6);
 }
