@@ -34,7 +34,9 @@ export const NodeGrid = (props: Props): JSX.Element => {
                     <Node
                         key={nodeKey}
                         nodeData={nodeData}
-                        isDisplayWeight={props.algorithmType === DIJKSTRA && !nodeData.isWall}
+                        isDisplayWeight={
+                            props.algorithmType === DIJKSTRA && !nodeData.isWall
+                        }
                         isStart={isSamePosition(
                             nodeData,
                             props.gridMarkedPosition.start,

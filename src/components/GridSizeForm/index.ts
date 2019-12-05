@@ -1,2 +1,2 @@
 import ConnectedGridSizeForm from './GridSizeForm';
-export {ConnectedGridSizeForm};
+export { ConnectedGridSizeForm };

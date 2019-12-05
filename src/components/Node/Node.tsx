@@ -30,7 +30,7 @@ export const Node = (props: Props): JSX.Element => {
             return PATH;
         } else if (props.nodeData.isVisited) {
             return VISITED;
-        } else if(props.nodeData.isWall) {
+        } else if (props.nodeData.isWall) {
             return WALL;
         } else {
             return 'transparent';

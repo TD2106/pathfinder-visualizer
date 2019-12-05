@@ -3,7 +3,7 @@ import { ReduxStore } from '../../type/ReduxStore';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import {  DIJKSTRA } from '../../constants/algorithms';
+import { DIJKSTRA } from '../../constants/algorithms';
 import {
     visualizePathFinding,
     generateMaze,
@@ -31,14 +31,29 @@ const CONTROLLER_BUTTONS_CLASS = 'controller-buttons';
 export const ControllerButtons = (props: Props): JSX.Element => {
     return (
         <div className={CONTROLLER_BUTTONS_CLASS}>
-            <button onClick={props.dispatchVisualizePathFinding} disabled={props.isDisabledInput}>
+            <button
+                onClick={props.dispatchVisualizePathFinding}
+                disabled={props.isDisabledInput}
+            >
                 Visualize Pathfinding
             </button>
-            <button onClick={props.dispatchGenerateMaze} disabled={props.isDisabledInput}>Generate Maze</button>
-            <button onClick={props.dispatchResetGrid} disabled={props.isDisabledInput}>Reset Grid</button>
+            <button
+                onClick={props.dispatchGenerateMaze}
+                disabled={props.isDisabledInput}
+            >
+                Generate Maze
+            </button>
+            <button
+                onClick={props.dispatchResetGrid}
+                disabled={props.isDisabledInput}
+            >
+                Reset Grid
+            </button>
             <button
                 onClick={props.dispatchGenerateRandomWeight}
-                disabled={props.algorithmType !== DIJKSTRA || props.isDisabledInput}
+                disabled={
+                    props.algorithmType !== DIJKSTRA || props.isDisabledInput
+                }
             >
                 Generate random weight for nodes
             </button>

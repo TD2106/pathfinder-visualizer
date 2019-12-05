@@ -7,7 +7,11 @@ import {
     HORIZONTAL_DIVISION,
     ALGORITHM_GRID_UPDATE_TIMEOUT,
 } from '../constants/algorithms';
-import { generateRandomIntegerInRange, sleep, getValueWithinRange } from '../utils';
+import {
+    generateRandomIntegerInRange,
+    sleep,
+    getValueWithinRange,
+} from '../utils';
 
 export class MazeGenerator {
     private rows: number;
@@ -118,9 +122,18 @@ export class MazeGenerator {
             startingCol + 1,
             endingCol - 1,
         );
-        const start = startingCol - 1 < 0 || this.wallNodeKeySet.has(this.createNodeKey(divideRow, startingCol)) ? startingCol : startingCol + 1;
-        const end = endingCol + 1 === this.cols || this.wallNodeKeySet.has(this.createNodeKey(divideRow, endingCol)) ? endingCol : endingCol - 1;
-        blankColIndex = start === startingCol && end === endingCol ? blankColIndex : -1;
+        const start =
+            startingCol - 1 < 0 ||
+            this.wallNodeKeySet.has(this.createNodeKey(divideRow, startingCol))
+                ? startingCol
+                : startingCol + 1;
+        const end =
+            endingCol + 1 === this.cols ||
+            this.wallNodeKeySet.has(this.createNodeKey(divideRow, endingCol))
+                ? endingCol
+                : endingCol - 1;
+        blankColIndex =
+            start === startingCol && end === endingCol ? blankColIndex : -1;
         for (let colIndex = start; colIndex <= end; colIndex += 1) {
             if (!this.isPositionNotStartOrEndPosition(divideRow, colIndex)) {
                 blankColIndex = -1;
@@ -148,9 +161,18 @@ export class MazeGenerator {
             startingRow + 1,
             endingRow - 1,
         );
-        const start = startingRow - 1 < 0 || this.wallNodeKeySet.has(this.createNodeKey(startingRow, divideCol)) ? startingRow : startingRow + 1;
-        const end = endingRow + 1 === this.rows || this.wallNodeKeySet.has(this.createNodeKey(endingRow, divideCol)) ? endingRow : endingRow - 1;
-        blankRowIndex = start === startingRow && end === endingRow ? blankRowIndex : -1;
+        const start =
+            startingRow - 1 < 0 ||
+            this.wallNodeKeySet.has(this.createNodeKey(startingRow, divideCol))
+                ? startingRow
+                : startingRow + 1;
+        const end =
+            endingRow + 1 === this.rows ||
+            this.wallNodeKeySet.has(this.createNodeKey(endingRow, divideCol))
+                ? endingRow
+                : endingRow - 1;
+        blankRowIndex =
+            start === startingRow && end === endingRow ? blankRowIndex : -1;
         for (let rowIndex = start; rowIndex <= end; rowIndex += 1) {
             if (!this.isPositionNotStartOrEndPosition(rowIndex, divideCol)) {
                 blankRowIndex = -1;
@@ -171,7 +193,12 @@ export class MazeGenerator {
         startRange: number,
         endRange: number,
     ): number => {
-        return getValueWithinRange(Math.floor((endRange + startRange) / 2) + generateRandomIntegerInRange(0, 2), startRange, endRange);
+        return getValueWithinRange(
+            Math.floor((endRange + startRange) / 2) +
+                generateRandomIntegerInRange(0, 2),
+            startRange,
+            endRange,
+        );
     };
 
     private isPositionNotStartOrEndPosition = (
@@ -194,5 +221,5 @@ export class MazeGenerator {
 
     private createNodeKey = (rowIndex: number, colIndex: number): string => {
         return `r${rowIndex}c${colIndex}`;
-    }
+    };
 }

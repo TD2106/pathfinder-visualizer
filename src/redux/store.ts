@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
     gridConfig: gridConfigReducer,
     nodes: nodesReducer,
     gridMarkedPosition: gridMarkedPositionReducer,
-    isDisabledInput: isDisabledInputReducer
+    isDisabledInput: isDisabledInputReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));
