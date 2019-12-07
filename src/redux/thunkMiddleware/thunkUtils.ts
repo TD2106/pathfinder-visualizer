@@ -1,7 +1,13 @@
 import { GridPosition, NodeData } from '../../type/NodeData';
-import { generateRandomIntegerInRange } from '../../utils';
+import { generateRandomIntegerInRange, sleep } from '../../utils';
 import { GridMarkedPosition } from '../../type/ReduxStore';
 import { cloneDeep, isEqual } from 'lodash';
+import { Dispatch } from 'redux';
+import {
+    UpdateNodeUIActionCreator,
+    UpdateGridUIBooleanValue,
+} from '../../type/Function';
+import { ALGORITHM_GRID_UPDATE_TIMEOUT } from '../../constants/algorithms';
 
 export const createNewInitialNodesData = (
     rows: number,
@@ -44,6 +50,20 @@ export const createRandomGridMarkedPosition = (
         end: endPosition,
     };
     return gridMarkedPosition;
+};
+
+export const updateNodeUIFactory = (
+    dispatch: Dispatch,
+    actionCreator: UpdateNodeUIActionCreator,
+): UpdateGridUIBooleanValue => {
+    return async (
+        rowIndex: number,
+        colIndex: number,
+        value: boolean,
+    ): Promise<void> => {
+        dispatch(actionCreator(rowIndex, colIndex, value));
+        await sleep(ALGORITHM_GRID_UPDATE_TIMEOUT);
+    };
 };
 
 const generateRandomPosition = (rows: number, cols: number): GridPosition => {

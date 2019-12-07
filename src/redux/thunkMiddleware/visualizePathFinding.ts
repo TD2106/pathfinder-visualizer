@@ -2,9 +2,9 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { ReduxStore } from '../../type/ReduxStore';
 import { setNodeIsVisited, setNodeIsPath } from '../nodes/actions';
-import { UpdateGridUIBooleanValue } from '../../type/Function';
 import { PathFinderBuilder, PathFinder } from '../../algorithms';
 import { disableInput, enableInput } from '../isDisabledInput/actions';
+import { updateNodeUIFactory } from './thunkUtils';
 
 export const visualizePathFinding = (): ThunkAction<
     Promise<void>,
@@ -21,20 +21,6 @@ export const visualizePathFinding = (): ThunkAction<
     };
 };
 
-const updateIsVisitedFactory = (
-    dispatch: Dispatch,
-): UpdateGridUIBooleanValue => {
-    return (rowIndex, colIndex, isVisited): void => {
-        dispatch(setNodeIsVisited(rowIndex, colIndex, isVisited));
-    };
-};
-
-const updateIsPathFactory = (dispatch: Dispatch): UpdateGridUIBooleanValue => {
-    return (rowIndex, colIndex, isPath): void => {
-        dispatch(setNodeIsPath(rowIndex, colIndex, isPath));
-    };
-};
-
 const createPathFinder = (
     currentState: ReduxStore,
     dispatch: Dispatch,
@@ -44,8 +30,10 @@ const createPathFinder = (
         .setRows(currentState.gridConfig.rows)
         .setCols(currentState.gridConfig.cols)
         .setNodes(currentState.nodes)
-        .setUpdateGridUIIsPath(updateIsPathFactory(dispatch))
-        .setUpdateGridUIIsVisted(updateIsVisitedFactory(dispatch))
+        .setUpdateGridUIIsPath(updateNodeUIFactory(dispatch, setNodeIsPath))
+        .setUpdateGridUIIsVisted(
+            updateNodeUIFactory(dispatch, setNodeIsVisited),
+        )
         .setStartPosition(currentState.gridMarkedPosition.start)
         .setEndPosition(currentState.gridMarkedPosition.end)
         .build();

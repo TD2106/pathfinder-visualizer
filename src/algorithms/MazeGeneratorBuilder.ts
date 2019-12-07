@@ -1,4 +1,4 @@
-import { EMPTY_FUNCTION } from '../constants/commonConstants';
+import { EMPTY_ASYNC_FUNCTION } from '../constants/commonConstants';
 import { UpdateGridUIBooleanValue } from '../type/Function';
 import { GridPosition } from '../type/NodeData';
 import { EMPTY_GRID_POSITION } from '../constants/grid';
@@ -7,7 +7,7 @@ import { MazeGenerator } from './MazeGenerator';
 export class MazeGeneratorBuilder {
     private _rows = 0;
     private _cols = 0;
-    private _updateGridUIIsWall: UpdateGridUIBooleanValue = EMPTY_FUNCTION;
+    private _updateGridUIIsWall: UpdateGridUIBooleanValue = EMPTY_ASYNC_FUNCTION;
     private _startPosition: GridPosition = EMPTY_GRID_POSITION;
     private _endPosition: GridPosition = EMPTY_GRID_POSITION;
 

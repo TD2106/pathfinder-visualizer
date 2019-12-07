@@ -1,13 +1,11 @@
 import { NodeData, GridPosition } from '../type/NodeData';
 import {
-    sleep,
     isPositionUnVisted,
     createNewPositionBasedOnDirection,
     isValidPosition,
     isNotWallNode,
 } from '../utils';
 import {
-    ALGORITHM_GRID_UPDATE_TIMEOUT,
     WALL_VALUE,
     MAX_COST_VALUE,
     NEIGHBORS_DIRECTION,
@@ -70,8 +68,7 @@ export class PathFinder {
     private visualizePath = async (): Promise<void> => {
         const path = this.constructPath();
         for (const { rowIndex, colIndex } of path) {
-            this.updateGridUIIsPath(rowIndex, colIndex, true);
-            await sleep(ALGORITHM_GRID_UPDATE_TIMEOUT);
+            await this.updateGridUIIsPath(rowIndex, colIndex, true);
         }
     };
 

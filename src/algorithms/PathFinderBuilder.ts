@@ -1,5 +1,8 @@
 import { PathFinder } from './PathFinder';
-import { BLANK_STRING, EMPTY_FUNCTION } from '../constants/commonConstants';
+import {
+    BLANK_STRING,
+    EMPTY_ASYNC_FUNCTION,
+} from '../constants/commonConstants';
 import { UpdateGridUIBooleanValue } from '../type/Function';
 import { GridPosition, NodeData } from '../type/NodeData';
 import { EMPTY_GRID_POSITION } from '../constants/grid';
@@ -9,8 +12,8 @@ export class PathFinderBuilder {
     private _rows = 0;
     private _cols = 0;
     private _nodes: NodeData[] = [];
-    private _updateGridUIIsVisted: UpdateGridUIBooleanValue = EMPTY_FUNCTION;
-    private _updateGridUIIsPath: UpdateGridUIBooleanValue = EMPTY_FUNCTION;
+    private _updateGridUIIsVisted: UpdateGridUIBooleanValue = EMPTY_ASYNC_FUNCTION;
+    private _updateGridUIIsPath: UpdateGridUIBooleanValue = EMPTY_ASYNC_FUNCTION;
     private _startPosition: GridPosition = EMPTY_GRID_POSITION;
     private _endPosition: GridPosition = EMPTY_GRID_POSITION;
 

@@ -5,15 +5,11 @@ import { CostFindingStrategyBuilder } from './StrategyBuilder';
 import TinyQueue from 'tinyqueue';
 import { QueueNode, queueNodeComparator } from './types';
 import {
-    sleep,
     isPositionUnVisted,
     isAbleToEnterPosition,
     createNewPositionBasedOnDirection,
 } from '../../utils';
-import {
-    ALGORITHM_GRID_UPDATE_TIMEOUT,
-    NEIGHBORS_DIRECTION,
-} from '../../constants/algorithms';
+import { NEIGHBORS_DIRECTION } from '../../constants/algorithms';
 import { isEqual } from 'lodash';
 
 export class DijkstraStrategy implements CostFindingStrategy {
@@ -47,7 +43,7 @@ export class DijkstraStrategy implements CostFindingStrategy {
             if (!isPositionUnVisted(position, this.cost)) {
                 continue;
             }
-            this.updateGridUIIsVisited(
+            await this.updateGridUIIsVisited(
                 position.rowIndex,
                 position.colIndex,
                 true,
@@ -56,7 +52,6 @@ export class DijkstraStrategy implements CostFindingStrategy {
             if (isEqual(position, this.endPosition)) {
                 return;
             }
-            await sleep(ALGORITHM_GRID_UPDATE_TIMEOUT);
             NEIGHBORS_DIRECTION.forEach((nextDirection): void =>
                 this.handleNewDirection(
                     position,

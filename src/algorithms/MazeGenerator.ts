@@ -5,13 +5,8 @@ import {
     MIN_LENGTH_FOR_RECURSIVE_DIVISION,
     VERTICAL_DIVISION,
     HORIZONTAL_DIVISION,
-    ALGORITHM_GRID_UPDATE_TIMEOUT,
 } from '../constants/algorithms';
-import {
-    generateRandomIntegerInRange,
-    sleep,
-    getValueWithinRange,
-} from '../utils';
+import { generateRandomIntegerInRange, getValueWithinRange } from '../utils';
 
 export class MazeGenerator {
     private rows: number;
@@ -213,11 +208,13 @@ export class MazeGenerator {
         );
     };
 
-    private async updateIsWallAndSleep(rowIndex: number, colIndex: number) {
-        this.updateGridUIIsWall(rowIndex, colIndex, true);
+    private updateIsWallAndSleep = async (
+        rowIndex: number,
+        colIndex: number,
+    ): Promise<void> => {
+        await this.updateGridUIIsWall(rowIndex, colIndex, true);
         this.wallNodeKeySet.add(this.createNodeKey(rowIndex, colIndex));
-        await sleep(ALGORITHM_GRID_UPDATE_TIMEOUT);
-    }
+    };
 
     private createNodeKey = (rowIndex: number, colIndex: number): string => {
         return `r${rowIndex}c${colIndex}`;
